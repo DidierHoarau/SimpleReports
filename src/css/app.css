@@ -1,0 +1,51 @@
+body, div, p, a, td, h1, h2, h3, h4, h5, h6, span, li {
+  font-family: 'Roboto', sans-serif;
+}
+
+#content_inside {
+  margin-top: 30px;
+}
+
+textarea {
+  font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+}
+
+.report-generate h1, .report-edit h1 {
+    margin-bottom: 1em;
+}
+
+.report-generate h4 {
+    margin-bottom: 0.8em;
+}
+
+.report-generate-card {
+    padding: 8px;
+}
+
+.report-generate-card td, .report-generate-card th {
+    padding:0.5em;
+}
+
+@media (min-width: 34em) {
+    .card-columns {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
+    }
+}
+
+@media (min-width: 48em) {
+    .card-columns {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
+    }
+}
+
+@media (min-width: 62em) {
+    .card-columns {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+}

@@ -1,0 +1,18 @@
+<div id="content_inside">
+
+  <table class="table table-hover">
+    <thead><tr><th>Reports</th><th>&nbsp;</th></tr></thead>
+    <tbody>
+      <tr ng-repeat="report in reports">
+        <td ng-click="changeRoute('#/generate/'+report.id)">{{ report.title }}</td>
+        <td><h3 class="pull-right"><i class="fa fa-pencil-square-o" aria-hidden="true" ng-click="changeRoute('#/edit/'+report.id)"></i></h3></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row">
+    <br />
+    <button class="btn btn-primary pull-right" ng-click="changeRoute('#/edit/')">New Report</button>
+  </div>
+
+</div>

@@ -1,0 +1,52 @@
+<div id="content_inside" class="report-edit">
+
+  <div class=row>
+    <div class="col-xs-10 col-md-11">
+      <h1>Report: {{ report.title }}</h1>
+    </div>
+    <div class="col-xs-2 col-md-1">
+      <h1 class="pull-right"><i class="fa fa-play-circle-o" aria-hidden="true" ng-click="changeRoute('#/generate/'+report.id)"></i></h1>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" class="form-control" ng-model="report.title">
+  </div>
+
+  <div class="card" ng-repeat="subreport in report.subreports">
+
+    <div class="card-block">
+
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" ng-model="subreport.title">
+      </div>
+
+      <div class="form-group">
+        <label for="sel1">Type:</label>
+        <select class="form-control" ng-model="subreport.type">
+          <option>table</option>
+          <option>line</option>
+          <option>bar</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="comment">SQL:</label>
+        <textarea class="form-control" rows="5" ng-model="subreport.sql"></textarea>
+      </div>
+
+    </div>
+
+  </div>
+
+  <hr />
+
+  <div class="actionbar">
+    <button class="btn btn-default" ng-click="addSubReport()">Add Sub Report</button>
+    <button class="btn btn-primary" ng-click="save()">Save</button>
+    <button class="btn" ng-click="delete()">Delete</button>
+  </div>
+  
+</div>
