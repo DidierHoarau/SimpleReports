@@ -64,4 +64,41 @@ angular.module('reportseditctrl', [ 'toaster' ])
         $scope.report.subreports.push(new_subreport);
     };
 
+    // Move a report up
+    $scope.moveSubreportUp = function(origin_position) {
+        if (origin_position==0) {
+            return;
+        }
+        var new_array = [];
+        for (var i=0;i<$scope.report.subreports.length;i++) {
+            if (i==origin_position-1) {
+                new_array.push($scope.report.subreports[origin_position]);
+            } else if (i==origin_position) {
+                new_array.push($scope.report.subreports[origin_position-1]);
+            } else {
+                new_array.push($scope.report.subreports[i]);
+            }
+        }
+        $scope.report.subreports = new_array;
+    };
+
+    // Move a report down
+    $scope.moveSubreportDown = function(origin_position) {
+        if (origin_position==$scope.report.subreports.length-1) {
+            return;
+        }
+        var new_array = [];
+        for (var i=0;i<$scope.report.subreports.length;i++) {
+            if (i==origin_position) {
+                new_array.push($scope.report.subreports[origin_position+1]);
+            } else if (i==origin_position+1) {
+                new_array.push($scope.report.subreports[origin_position]);
+            } else {
+                new_array.push($scope.report.subreports[i]);
+            }
+        }
+        $scope.report.subreports = new_array;
+    };
+
+
 }]);

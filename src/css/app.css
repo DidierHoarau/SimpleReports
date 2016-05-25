@@ -49,3 +49,22 @@ textarea {
         column-count: 2;
     }
 }
+
+.form-title input {
+    font-size: 1.8em;
+}
+
+.main-action {
+    padding-top: 0.4em;
+}
+
+.card {
+    background-color: #FDFDFD;
+}
+
+.card label {
+    width: 100%;
+}
+.card i {
+    margin-left: 2em;
+}

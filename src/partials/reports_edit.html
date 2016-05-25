@@ -1,25 +1,25 @@
 <div id="content_inside" class="report-edit">
 
   <div class=row>
-    <div class="col-xs-10 col-md-11">
-      <h1>Report: {{ report.title }}</h1>
+    <div class="form-title col-xs-10 col-md-11">
+      <input type="text" class="form-control" ng-model="report.title" placeholder="Report Title">
     </div>
-    <div class="col-xs-2 col-md-1">
+    <div class="main-action col-xs-2 col-md-1">
       <h1 class="pull-right"><i class="fa fa-play-circle-o" aria-hidden="true" ng-click="changeRoute('#/generate/'+report.id)"></i></h1>
     </div>
   </div>
 
   <div class="form-group">
     <label>Title</label>
-    <input type="text" class="form-control" ng-model="report.title">
+
   </div>
 
-  <div class="card" ng-repeat="subreport in report.subreports">
+  <div class="card" ng-repeat="subreport in report.subreports track by $index">
 
     <div class="card-block">
 
       <div class="form-group">
-        <label>Title</label>
+        <label>Title<div class="order-buttons pull-right"><i ng-show="!$first" ng-click="moveSubreportUp($index)" class="fa fa-arrow-up" aria-hidden="true"></i><i ng-show="!$last" ng-click="moveSubreportDown($index)" class="fa fa-arrow-down" aria-hidden="true"></i></div></label>
         <input type="text" class="form-control" ng-model="subreport.title">
       </div>
 
