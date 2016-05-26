@@ -10,8 +10,8 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
     $scope.report_cur_pos = 0;
 
     // Color
-    var colors = [  "rgba(244,67,54,1)", "rgba(33,150,243,1)", "rgba(76,175,80,1)", "rgba(255,152,0,1)" ];
-    var colorsBack = [  "rgba(244,67,54,0.05)", "rgba(33,150,243,0.05)", "rgba(76,175,80,0.1)", "rgba(255,152,0,0.1)" ];
+    var colors = [  "rgba(244,67,54,1)", "rgba(33,150,243,1)", "rgba(76,175,80,1)", "rgba(255,152,0,1)", "rgba(103,58,183,1)", "rgba(255,235,59,1)", "rgba(132,85,72,1)" ];
+    var colorsBack = [  "rgba(244,67,54,0.05)", "rgba(33,150,243,0.05)", "rgba(76,175,80,0.05)", "rgba(255,152,0,0.05)", "rgba(103,58,183,0.05)", "rgba(255,235,59,0.05)", "rgba(132,85,72,0.05)" ];
 
     // Config
     Chart.defaults.global.responsive = true;
