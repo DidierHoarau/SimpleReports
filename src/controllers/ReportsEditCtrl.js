@@ -64,7 +64,7 @@ angular.module('reportseditctrl', [ 'toaster' ])
         $scope.report.subreports.push(new_subreport);
     };
 
-    // Move a report up
+    // Move a subreport up
     $scope.moveSubreportUp = function(origin_position) {
         if (origin_position==0) {
             return;
@@ -82,7 +82,7 @@ angular.module('reportseditctrl', [ 'toaster' ])
         $scope.report.subreports = new_array;
     };
 
-    // Move a report down
+    // Move a subreport down
     $scope.moveSubreportDown = function(origin_position) {
         if (origin_position==$scope.report.subreports.length-1) {
             return;
@@ -95,6 +95,17 @@ angular.module('reportseditctrl', [ 'toaster' ])
                 new_array.push($scope.report.subreports[origin_position]);
             } else {
                 new_array.push($scope.report.subreports[i]);
+            }
+        }
+        $scope.report.subreports = new_array;
+    };
+
+    // Delete a subreport down
+    $scope.deleteSubreport = function(position) {
+        var new_array = [];
+        for (var i=0;i<$scope.report.subreports.length;i++) {
+            if (i!=position) {
+                new_array.push($scope.report.subreports[position]);
             }
         }
         $scope.report.subreports = new_array;

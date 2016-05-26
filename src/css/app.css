@@ -6,6 +6,10 @@ body, div, p, a, td, h1, h2, h3, h4, h5, h6, span, li {
   margin-top: 30px;
 }
 
+footer {
+    min-height: 3em;
+}
+
 textarea {
   font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
 }
