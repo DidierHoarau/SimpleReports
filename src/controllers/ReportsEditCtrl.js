@@ -111,5 +111,23 @@ angular.module('reportseditctrl', [ 'toaster' ])
         $scope.report.subreports = new_array;
     };
 
+    // Check if the record is not a title
+    $scope.isNotTitle = function(subreport) {
+        if (subreport.type=='title') {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    // Check if the record is not a title
+    $scope.isNew = function() {
+        if ($scope.report.id==null || $scope.report.id=="") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }]);

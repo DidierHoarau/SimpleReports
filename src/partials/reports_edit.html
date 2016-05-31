@@ -5,13 +5,8 @@
       <input type="text" class="form-control" ng-model="report.title" placeholder="Report Title">
     </div>
     <div class="main-action col-xs-2 col-md-1">
-      <h1 class="pull-right"><i class="fa fa-play-circle-o" aria-hidden="true" ng-click="changeRoute('#/generate/'+report.id)"></i></h1>
+      <h1 ng-show="!isNew()" class="pull-right"><i class="fa fa-play-circle-o" aria-hidden="true" ng-click="changeRoute('#/generate/'+report.id)"></i></h1>
     </div>
-  </div>
-
-  <div class="form-group">
-    <label>Title</label>
-
   </div>
 
   <div class="card" ng-repeat="subreport in report.subreports track by $index">
@@ -29,10 +24,11 @@
           <option>table</option>
           <option>line</option>
           <option>bar</option>
+          <option>title</option>
         </select>
       </div>
 
-      <div class="form-group">
+      <div ng-show="isNotTitle(subreport)" class="form-group">
         <label for="sel1">Size:</label>
         <select class="form-control" ng-model="subreport.width">
           <option value="12">Full width</option>
@@ -42,7 +38,7 @@
         </select>
       </div>
 
-      <div class="form-group">
+      <div ng-show="isNotTitle(subreport)" class="form-group">
         <label for="comment">SQL:</label>
         <textarea class="form-control" rows="5" ng-model="subreport.sql"></textarea>
       </div>
@@ -51,7 +47,7 @@
 
   </div>
 
-  <button class="btn btn-default" ng-click="addSubReport()">Add Sub Report</button>
+  <button class="subreport-button btn btn-default" ng-click="addSubReport()">Add Sub Report</button>
 
   <hr />
 

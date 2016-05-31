@@ -47,6 +47,18 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
             return;
         }
 
+        // Titles
+        if ($scope.report.subreports[$scope.report_cur_pos].type=='title') {
+
+            $scope.report.subreports[$scope.report_cur_pos].is_title=true;
+            $scope.report.subreports[$scope.report_cur_pos].width=12;
+            // Next 
+            $scope.report_cur_pos++;
+            $scope.executeReport();
+            return;
+        }
+
+        // Others: Queries
         httpT.get("/api/reports/execute/"+$scope.report.id+"/"+$scope.report_cur_pos).then(
             function successCallback(response) {
 
