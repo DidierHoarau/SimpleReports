@@ -43,7 +43,7 @@ angular.module('reportseditctrl', [ 'toaster' ])
             });
     };
 
-    // Save a report
+    // Delete a report
     $scope.delete = function() {
         var r = confirm("Delete Report?");
         if (r == true) {
@@ -105,7 +105,7 @@ angular.module('reportseditctrl', [ 'toaster' ])
         var new_array = [];
         for (var i=0;i<$scope.report.subreports.length;i++) {
             if (i!=position) {
-                new_array.push($scope.report.subreports[position]);
+                new_array.push($scope.report.subreports[i]);
             }
         }
         $scope.report.subreports = new_array;

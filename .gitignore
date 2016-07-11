@@ -1,0 +1,4 @@
+api/vendor/
+bower_components/
+api/composer.lock
+data/
