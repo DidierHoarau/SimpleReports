@@ -22,8 +22,8 @@
     "angular-i18n": "^1.5.3",
     "tether": "^1.2.2",
     "rrssb": "^1.10.0",
-    "Chart.js": "^2.1.0",
     "AngularJS-Toaster": "angularjs-toaster#^2.0.0",
-    "angular-sanitize": "^1.5.5"
+    "angular-sanitize": "^1.5.5",
+    "chart.js": "npm:chart.js#^2.2.1"
   }
 }
