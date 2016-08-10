@@ -1,11 +1,11 @@
 <div id="content_inside" class="report-edit">
 
   <div class=row>
-    <div class="form-title col-xs-10 col-md-11">
+    <div class="form-title col-xs-10 col-md-10">
       <input type="text" class="form-control" ng-model="report.title" placeholder="Report Title">
     </div>
-    <div class="main-action col-xs-2 col-md-1">
-      <h1 ng-show="!isNew()" class="pull-right"><i class="fa fa-play-circle-o" aria-hidden="true" ng-click="changeRoute('#/generate/'+report.id)"></i></h1>
+    <div class="main-action col-xs-2 col-md-2">
+      <h1 ng-show="!isNew()" class="pull-right"><i class="fa fa-floppy-o" aria-hidden="true" ng-click="save()"></i>&nbsp;<i class="fa fa-play-circle-o" aria-hidden="true" ng-click="changeRoute('#/generate/'+report.id)"></i></h1>
     </div>
   </div>
 
@@ -14,33 +14,37 @@
     <div class="card-block">
 
       <div class="form-group">
-        <label>Title<div class="order-buttons pull-right"><i ng-show="!$first" ng-click="moveSubreportUp($index)" class="fa fa-arrow-up" aria-hidden="true"></i><i ng-show="!$last" ng-click="moveSubreportDown($index)" class="fa fa-arrow-down" aria-hidden="true"></i><i ng-click="deleteSubreport($index)" class="fa fa-times" aria-hidden="true"></i></div></label>
+        <label>Title<div class="order-buttons pull-right"><i ng-show="!$first" ng-click="moveSubreportUp($index)" class="fa fa-arrow-up" aria-hidden="true"></i><i ng-show="!$last" ng-click="moveSubreportDown($index)" class="fa fa-arrow-down" aria-hidden="true"></i><i ng-click="deleteSubreport($index)" class="fa fa-times" aria-hidden="true"></i><i ng-show="subreport.hidden" ng-click="toggleExpandCollapse($index)" class="fa fa-expand" aria-hidden="true"></i><i ng-show="!subreport.hidden" ng-click="toggleExpandCollapse($index)" class="fa fa-compress" aria-hidden="true"></i></div></label>
         <input type="text" class="form-control" ng-model="subreport.title">
       </div>
 
-      <div class="form-group">
-        <label for="sel1">Type:</label>
-        <select class="form-control" ng-model="subreport.type">
-          <option>table</option>
-          <option>line</option>
-          <option>bar</option>
-          <option>title</option>
-        </select>
-      </div>
+      <div ng-show="!subreport.hidden">
 
-      <div ng-show="isNotTitle(subreport)" class="form-group">
-        <label for="sel1">Size:</label>
-        <select class="form-control" ng-model="subreport.width">
-          <option value="12">Full width</option>
-          <option value="8">Large</option>
-          <option value="6">Half</option>
-          <option value="4">Narrow</option>
-        </select>
-      </div>
+        <div class="form-group">
+          <label for="sel1">Type:</label>
+          <select class="form-control" ng-model="subreport.type">
+            <option>table</option>
+            <option>line</option>
+            <option>bar</option>
+            <option>title</option>
+          </select>
+        </div>
 
-      <div ng-show="isNotTitle(subreport)" class="form-group">
-        <label for="comment">SQL:</label>
-        <textarea class="form-control" rows="5" ng-model="subreport.sql"></textarea>
+        <div ng-show="isNotTitle(subreport)" class="form-group">
+          <label for="sel1">Size:</label>
+          <select class="form-control" ng-model="subreport.width">
+            <option value="12">Full width</option>
+            <option value="8">Large</option>
+            <option value="6">Half</option>
+            <option value="4">Narrow</option>
+          </select>
+        </div>
+
+        <div ng-show="isNotTitle(subreport)" class="form-group">
+          <label for="comment">SQL:</label>
+          <textarea class="form-control" rows="10" ng-model="subreport.sql"></textarea>
+        </div>
+
       </div>
 
     </div>

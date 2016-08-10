@@ -14,6 +14,10 @@ textarea {
   font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
 }
 
+.report-list a {
+    color: inherit;
+}
+
 .report-generate h1, .report-edit h1 {
     margin-bottom: 1em;
 }

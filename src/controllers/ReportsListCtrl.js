@@ -12,6 +12,9 @@ angular.module('reportslistctrl', [ ])
     // Query
     httpT.get("/api/reports/list").then(
         function successCallback(response) {
+            response.data.sort(function(a, b) {
+                return a.title.localeCompare(b.title);
+            });
             $scope.reports = response.data;
         }, 
         function errorCallback(response) {

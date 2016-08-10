@@ -1,10 +1,10 @@
 <div id="content_inside">
 
-  <table class="table table-hover">
+  <table class="table table-hover report-list">
     <thead><tr><th>Reports</th><th>&nbsp;</th></tr></thead>
     <tbody>
       <tr ng-repeat="report in reports">
-        <td ng-click="changeRoute('#/generate/'+report.id)">{{ report.title }}</td>
+        <td><a href="#/generate/{{report.id}}">{{ report.title }}</a></td>
         <td><h3 class="pull-right"><i class="fa fa-pencil-square-o" aria-hidden="true" ng-click="changeRoute('#/edit/'+report.id)"></i></h3></td>
       </tr>
     </tbody>

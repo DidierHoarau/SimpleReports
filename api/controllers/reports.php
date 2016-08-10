@@ -93,7 +93,7 @@ $reports->post("/edit/{report_id}", function($report_id,Request $request) use ($
     fwrite($fp, $data_json);
     fclose($fp);
 
-    return $app->json( $data_json, 201);    
+    return $app->json( $report_data, 201);    
 });
 
 /**
@@ -112,7 +112,7 @@ $reports->post("/add", function(Request $request) use ($app) {
     fwrite($fp, $data_json);
     fclose($fp);
 
-    return $app->json( $data_json, 201);    
+    return $app->json( $report_data, 201);    
 });
 
 /**

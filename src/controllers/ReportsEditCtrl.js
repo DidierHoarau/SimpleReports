@@ -8,11 +8,11 @@ angular.module('reportseditctrl', [ 'toaster' ])
     // Init
     $scope.report = { id: "", title: "", subreports: [] };
     var param_report_id = $routeParams.param;
-    var mode_new = true;
+    $scope.mode_new = true;
     if (param_report_id==null) {
-        mode_new = true;
+        $scope.mode_new = true;
     } else {
-        mode_new = false;
+        $scope.mode_new = false;
         $scope.report.id = param_report_id;
         loadReport($scope.report.id);
     }
@@ -21,6 +21,9 @@ angular.module('reportseditctrl', [ 'toaster' ])
     function loadReport(report_id) {
         httpT.get("/api/reports/get/"+report_id).then(
             function successCallback(response) {
+                for (var i=0;i<response.data.subreports.length;i++) {
+                    response.data.subreports[i].hidden=true;
+                }
                 $scope.report = response.data;
             }, 
             function errorCallback(response) {
@@ -31,11 +34,17 @@ angular.module('reportseditctrl', [ 'toaster' ])
     // Save a report
     $scope.save = function() {
         var url = "/api/reports/add";
-        if (!mode_new) {
+        if (!$scope.mode_new) {
             url = "/api/reports/edit/"+$scope.report.id;
         }
         httpT.post(url, $scope.report).then(
             function successCallback(response) {
+                $scope.report.id = response.data.id;
+                $scope.mode_new = false;
+                console.log($scope.report);
+                console.log($scope.mode_new);
+                console.log(response.data);
+                console.log(response.data.id);
                 toaster.pop('success', "Report", "Report Saved");
             }, 
             function errorCallback(response) {
@@ -60,7 +69,7 @@ angular.module('reportseditctrl', [ 'toaster' ])
 
     // Add a sub-report
     $scope.addSubReport = function() {
-        var new_subreport = { title: "", type: "t", sql: "" }
+        var new_subreport = { title: "", type: "t", sql: "", hidden: false }
         $scope.report.subreports.push(new_subreport);
     };
 
@@ -110,6 +119,12 @@ angular.module('reportseditctrl', [ 'toaster' ])
         }
         $scope.report.subreports = new_array;
     };
+
+    // Toggle Expand/Colapse
+    $scope.toggleExpandCollapse = function(position) {
+        $scope.report.subreports[position].hidden=!$scope.report.subreports[position].hidden;
+    };
+
 
     // Check if the record is not a title
     $scope.isNotTitle = function(subreport) {
