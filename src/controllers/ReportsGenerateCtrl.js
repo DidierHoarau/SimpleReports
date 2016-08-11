@@ -8,6 +8,7 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
     // Init
     $scope.report = { id: $routeParams.param, subreports: [ ] };
     $scope.report_cur_pos = 0;
+    $scope.report_html = [];
 
     // Color
     var colors = [  "rgba(244,67,54,1)", "rgba(33,150,243,1)", "rgba(76,175,80,1)", "rgba(255,152,0,1)", "rgba(103,58,183,1)", "rgba(255,235,59,1)", "rgba(132,85,72,1)" ];
@@ -46,6 +47,7 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
         if ($scope.report.subreports.length<=$scope.report_cur_pos) {
             return;
         }
+        $scope.report_html.push("");;
 
         // Titles
         if ($scope.report.subreports[$scope.report_cur_pos].type=='title') {
@@ -63,6 +65,7 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
             function successCallback(response) {
 
                 var subreport = $scope.report.subreports[$scope.report_cur_pos];
+                console.log(subreport);
 
                 // Specific cases for colors
                 if (subreport.type=='bar') {
@@ -119,7 +122,6 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
                         tmp_html += "<tr>";
                         tmp_html += "<td>"+x_labels[i]+"<td>";
                         for (var j=0; j<t_labels.length; j++) {
-                            // console.log(t_dataset[j].data[i]);
                             tmp_html += "<td>"+t_dataset[j].data[i]+"<td>";
                         }
                         tmp_html += "</tr>";
@@ -127,7 +129,7 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
                     tmp_html += "<tbody>";
                     tmp_html += "</tbody>";
                     tmp_html += "</table>";
-                    $scope.report_html = tmp_html;
+                    $scope.report_html[$scope.report_cur_pos] = tmp_html;
                 }
 
                 // Line

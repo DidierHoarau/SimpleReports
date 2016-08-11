@@ -11,12 +11,12 @@
 
   <div class="row">
 
-  <div class="col-xs-12 col-md-{{ subreport.width }} report-generate-card" ng-repeat="subreport in report.subreports">
+  <div class="col-xs-12 col-md-{{ subreport.width }} report-generate-card" ng-repeat="subreport in report.subreports track by $index">
     <h3 ng-show="subreport.is_title" class="card-title">{{ subreport.title }}</h4>
     <div ng-show="!subreport.is_title" class="card">
       <div class="card-block">
         <h4 ng-show="!subreport.is_title" class="card-title">{{ subreport.title }}</h4>
-        <div ng-show="subreport.is_table" ng-bind-html="report_html" class="ng-binding"></div>
+        <div ng-show="subreport.is_table" ng-bind-html="report_html[$index]" class="ng-binding"></div>
         <canvas ng-show="subreport.is_graph" id="subreport_{{ subreport.position }}" width="400" height="250"></canvas>
         <div ng-show="subreport.is_message" ng-bind-html="subreport.message" class="ng-binding"></div>
       </div>
