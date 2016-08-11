@@ -41,10 +41,6 @@ angular.module('reportseditctrl', [ 'toaster' ])
             function successCallback(response) {
                 $scope.report.id = response.data.id;
                 $scope.mode_new = false;
-                console.log($scope.report);
-                console.log($scope.mode_new);
-                console.log(response.data);
-                console.log(response.data.id);
                 toaster.pop('success', "Report", "Report Saved");
             }, 
             function errorCallback(response) {

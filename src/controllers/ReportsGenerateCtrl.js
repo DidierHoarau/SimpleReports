@@ -76,7 +76,8 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
                 var x_labels = [];
                 var x_label_title = "";
                 var t_dataset = []
-                for(var i=0; i<Object.keys(response.data).length; i++) {
+
+                for(var i=0; i<response.data.length; i++) {
                     var row = response.data[i];
                     x_labels.push(row[Object.keys(row)[0]]);
                     // If first row, init the array
@@ -92,7 +93,14 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
                             t_dataset[j-1].label = Object.keys(row)[j];
                             t_labels.push(Object.keys(row)[j]);
                         }
-                        t_dataset[j-1].data.push( Number( row[Object.keys(row)[j]] ) );
+                        // Force format?
+                        if (row[Object.keys(row)[j]]!=null) {
+                            t_dataset[j-1].data.push( row[Object.keys(row)[j]] );
+                        } else if (subreport.type=='table') {
+                            t_dataset[j-1].data.push("");
+                        } else {
+                            t_dataset[j-1].data.push(0);
+                        }
                     }
                 }
 
@@ -111,6 +119,7 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
                         tmp_html += "<tr>";
                         tmp_html += "<td>"+x_labels[i]+"<td>";
                         for (var j=0; j<t_labels.length; j++) {
+                            // console.log(t_dataset[j].data[i]);
                             tmp_html += "<td>"+t_dataset[j].data[i]+"<td>";
                         }
                         tmp_html += "</tr>";
