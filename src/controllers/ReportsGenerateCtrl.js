@@ -34,7 +34,7 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
                 $timeout(function() {
                     $scope.executeReport();
                 }, 0);
-            }, 
+            },
             function errorCallback(response) {
                 toaster.pop('error', "Report", "Error loading Report");
             });
@@ -54,7 +54,7 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
 
             $scope.report.subreports[$scope.report_cur_pos].is_title=true;
             $scope.report.subreports[$scope.report_cur_pos].width=12;
-            // Next 
+            // Next
             $scope.report_cur_pos++;
             $scope.executeReport();
             return;
@@ -65,7 +65,6 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
             function successCallback(response) {
 
                 var subreport = $scope.report.subreports[$scope.report_cur_pos];
-                console.log(subreport);
 
                 // Specific cases for colors
                 if (subreport.type=='bar') {
@@ -88,7 +87,7 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
                         x_label_title = Object.keys(row)[0];
                         for (var j=1; j<Object.keys(row).length; j++) {
                             t_dataset.push( { label : 'Label'+j, borderColor: colors[j-1], backgroundColor: colorsBack_toUse[j-1], data: [] } );
-                        }                        
+                        }
                     }
                     // Fill data
                     for (var j=1; j<Object.keys(row).length; j++) {
@@ -106,6 +105,13 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
                         }
                     }
                 }
+                // Skip if no data
+                if (response.data.length==0) {
+                    // Next
+                    $scope.report_cur_pos++;
+                    $scope.executeReport();
+                    return;
+                }
 
                 // Table
                 if (false || subreport.type=='table') {
@@ -118,7 +124,7 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
                         tmp_html += "<th>"+t_labels[i]+"<th>";
                     }
                     tmp_html += "</tr></thead>";
-                    for (var i=0; i<t_dataset[0].data.length; i++) {
+                    for (var i=0; i<x_labels.length; i++) {
                         tmp_html += "<tr>";
                         tmp_html += "<td>"+x_labels[i]+"<td>";
                         for (var j=0; j<t_labels.length; j++) {
@@ -182,7 +188,7 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
                     });
                 }
 
-                // Next 
+                // Next
                 $scope.report_cur_pos++;
                 $scope.executeReport();
 
@@ -191,12 +197,13 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
                 $scope.report.subreports[$scope.report_cur_pos].is_message = true;
                 $scope.report.subreports[$scope.report_cur_pos].message = response.data;
 
-                // Next 
+                // Next
                 $scope.report_cur_pos++;
                 $scope.executeReport();
             }
         );
     };
+
 
 
 }]);

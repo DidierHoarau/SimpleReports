@@ -55,9 +55,16 @@
 
   <hr />
 
-  <div class="row">
+  <div class="row actions">
+    <div class="dropdown pull-right">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <button class="dropdown-item" ng-click="saveAsNew()">Save as New</button>
+        <button class="dropdown-item" ng-click="delete()">Delete</button>
+      </div>
+    </div>
+    <button class="btn pull-right" ng-click="run()">Run</button>
     <button class="btn btn-primary pull-right" ng-click="save()">Save</button>
-    <button class="btn pull-right" ng-click="delete()">Delete</button>
   </div>
-  
+
 </div>

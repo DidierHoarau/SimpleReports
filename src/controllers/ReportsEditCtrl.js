@@ -25,7 +25,7 @@ angular.module('reportseditctrl', [ 'toaster' ])
                     response.data.subreports[i].hidden=true;
                 }
                 $scope.report = response.data;
-            }, 
+            },
             function errorCallback(response) {
                 toaster.pop('error', "Report", "Error loading Report");
             });
@@ -42,7 +42,7 @@ angular.module('reportseditctrl', [ 'toaster' ])
                 $scope.report.id = response.data.id;
                 $scope.mode_new = false;
                 toaster.pop('success', "Report", "Report Saved");
-            }, 
+            },
             function errorCallback(response) {
                 toaster.pop('error', "Report", "Error Saving Report");
             });
@@ -56,7 +56,7 @@ angular.module('reportseditctrl', [ 'toaster' ])
                 function successCallback(response) {
                     toaster.pop('success', "Report", "Report Deleted");
                     $scope.changeRoute('#/');
-                }, 
+                },
                 function errorCallback(response) {
                     toaster.pop('error', "Report", "Error Deleting Report");
                 });
@@ -129,6 +129,12 @@ angular.module('reportseditctrl', [ 'toaster' ])
         } else {
             return true;
         }
+    }
+
+    // Check if the record is not a title
+    $scope.saveAsNew = function() {
+        $scope.mode_new = true;
+        $scope.save();
     }
 
     // Check if the record is not a title

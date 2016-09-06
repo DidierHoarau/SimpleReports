@@ -86,3 +86,14 @@ textarea {
     padding-top: 1em;
     padding-bottom: 0.2em;
 }
+
+.actions button {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+}
+
+.report-text {
+    width:100%;
+}
