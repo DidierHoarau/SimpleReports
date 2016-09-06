@@ -8,6 +8,7 @@ This is a simple PHP reporting tool for MySQL databases.
 
 - In the root directory:
 ```
+npm install -g bower-npm-resolver
 bower update
 ```
 

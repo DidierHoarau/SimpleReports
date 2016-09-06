@@ -1,1 +1,1 @@
-var SERVER_URL="/simplereports";
+var SERVER_URL="";
