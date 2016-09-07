@@ -61,7 +61,7 @@ $reports->post("/execute/{report_id}/{subreport_position}", function($report_id,
 
     // Variable replacement
     foreach($variables as $variable) {
-        $sql = str_replace('!'.$variable[name].'!',$variable[value],$sql);
+        $sql = str_replace('!'.$variable['name'].'!',$variable['value'],$sql);
     }
 
     // Query
