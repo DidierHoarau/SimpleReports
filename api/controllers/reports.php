@@ -19,7 +19,7 @@ $reports->match("/list", function(Request $request) use ($app) {
     // Parse the folder
     if ($handle = opendir($folder_name)) {
 
-        while (false !== ($file = readdir($handle))) {    
+        while (false !== ($file = readdir($handle))) {
             if ( strlen($file)>5 && substr($file, -5)==".json" ) {
                 $report_string = file_get_contents($app['folder_data'].'/'.$file);
                 $report_json = json_decode($report_string, true);
@@ -35,8 +35,8 @@ $reports->match("/list", function(Request $request) use ($app) {
         sort($response_array);
     }
 
-    // Return 
-    return $app->json($response_array, 201);    
+    // Return
+    return $app->json($response_array, 201);
 });
 
 
@@ -44,20 +44,31 @@ $reports->match("/list", function(Request $request) use ($app) {
 /**
  * Execute a report
  */
-$reports->match("/execute/{report_id}/{subreport_posiion}", function($report_id,$subreport_posiion) use ($app) {
+$reports->post("/execute/{report_id}/{subreport_position}", function($report_id,$subreport_position,Request $request) use ($app) {
+
+    // Variables
+    $variables = $request->request->get('variables');
+    if (!isset($variables)) {
+        $variables = array();
+    }
 
     // Open the report file
     $report_string = file_get_contents($app['folder_data'].$report_id.".json");
     $report_json = json_decode($report_string, true);
 
     // Get the subreport
-    $sql = $report_json['subreports'][$subreport_posiion]['sql'];
+    $sql = $report_json['subreports'][$subreport_position]['sql'];
+
+    // Variable replacement
+    foreach($variables as $variable) {
+        $sql = str_replace('!'.$variable[name].'!',$variable[value],$sql);
+    }
 
     // Query
     $records = $app['db']->fetchAll( $sql );
 
-    // Return 
-    return $app->json($records, 201);    
+    // Return
+    return $app->json($records, 201);
 });
 
 
@@ -71,8 +82,8 @@ $reports->match("/get/{report_id}", function($report_id) use ($app) {
     $report_string = file_get_contents($app['folder_data'].$report_id.".json");
     $report_json = json_decode($report_string, true);
 
-    // Return 
-    return $app->json($report_json, 201);    
+    // Return
+    return $app->json($report_json, 201);
 });
 
 
@@ -86,6 +97,7 @@ $reports->post("/edit/{report_id}", function($report_id,Request $request) use ($
     $report_data->{'id'}    = $report_id;
     $report_data->{'title'} = $request->request->get('title');
     $report_data->{'subreports'}  = $request->request->get('subreports');
+    $report_data->{'variables'}  = $request->request->get('variables');
 
     $data_json = json_encode( $report_data );
 
@@ -93,7 +105,7 @@ $reports->post("/edit/{report_id}", function($report_id,Request $request) use ($
     fwrite($fp, $data_json);
     fclose($fp);
 
-    return $app->json( $report_data, 201);    
+    return $app->json( $report_data, 201);
 });
 
 /**
@@ -105,6 +117,7 @@ $reports->post("/add", function(Request $request) use ($app) {
     $report_data->{'id'}    = generateID(30);
     $report_data->{'title'} = $request->request->get('title');
     $report_data->{'subreports'}  = $request->request->get('subreports');
+    $report_data->{'variables'}  = $request->request->get('variables');
 
     $data_json = json_encode( $report_data );
 
@@ -112,7 +125,7 @@ $reports->post("/add", function(Request $request) use ($app) {
     fwrite($fp, $data_json);
     fclose($fp);
 
-    return $app->json( $report_data, 201);    
+    return $app->json( $report_data, 201);
 });
 
 /**

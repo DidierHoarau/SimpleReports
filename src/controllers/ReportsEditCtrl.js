@@ -6,7 +6,7 @@ angular.module('reportseditctrl', [ 'toaster' ])
 .controller('ReportsEditCtrl', ['$scope', 'httpT', 'toaster', '$routeParams', function($scope, httpT, toaster, $routeParams) {
 
     // Init
-    $scope.report = { id: "", title: "", subreports: [] };
+    $scope.report = { id: "", title: "", subreports: [], variables: [] };
     var param_report_id = $routeParams.param;
     $scope.mode_new = true;
     if (param_report_id==null) {
@@ -145,6 +145,42 @@ angular.module('reportseditctrl', [ 'toaster' ])
             return false;
         }
     }
+
+
+    // Should the legend for variable be displayed
+    $scope.variableDisplayLegend = function() {
+        if ($scope.report.variables==null || $scope.report.variables.length==0) {
+            return false;
+        }
+        return true;
+    }
+
+    // Add a new variable
+    $scope.variableAdd = function() {
+        if ($scope.report.variables==null) {
+            $scope.report.variables=[];
+        }
+        $scope.report.variables.push({ name: "", label: "", value: "" });
+    };
+
+    // Delete a variable
+    $scope.variableDelete = function(position) {
+        var new_array = [];
+        for (var i=0;i<$scope.report.variables.length;i++) {
+            if (i!=position) {
+                new_array.push($scope.report.variables[i]);
+            }
+        }
+        $scope.report.variables = new_array;
+    };
+
+    // Force the format of variables
+    $scope.variableNameChanged = function(position) {
+        var var_name = $scope.report.variables[position].name;
+        var_name = var_name.toUpperCase();
+        var_name = var_name.replace(/ /g,'');
+        $scope.report.variables[position].name = var_name;
+    };
 
 
 }]);

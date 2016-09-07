@@ -9,8 +9,20 @@
     </div>
   </div>
 
-  <div class="row">
+  <!-- Variables -->
+  <div class="card" ng-show="variableIsDisplayed()">
+    <div class="card-block">
+      <div ng-repeat="variable in report.variables track by $index">
+        <div class="row variable">
+          <div class="col-xs-3"><label>{{ variable.label }}</label></div>
+          <div class="col-xs-3"><input type="text" class="form-control" ng-model="variable.value"></div>
+        </div>
+      </div>
+      <button class="btn" ng-click="reportRun()">Re-Run Report</button>
+    </div>
+  </div>
 
+  <!-- Sub-Reports -->
   <div class="col-xs-12 col-md-{{ subreport.width }} report-generate-card" ng-repeat="subreport in report.subreports track by $index">
     <h3 ng-show="subreport.is_title" class="card-title">{{ subreport.title }}</h4>
     <div ng-show="!subreport.is_title" class="card">

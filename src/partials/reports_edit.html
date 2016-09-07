@@ -2,13 +2,34 @@
 
   <div class=row>
     <div class="form-title col-xs-10 col-md-10">
-      <input type="text" class="form-control" ng-model="report.title" placeholder="Report Title">
+      <input type="text" class="form-control" ng-model="report.title" placeholder="Report Title"><br />
     </div>
     <div class="main-action col-xs-2 col-md-2">
       <h1 ng-show="!isNew()" class="pull-right"><i class="fa fa-floppy-o" aria-hidden="true" ng-click="save()"></i>&nbsp;<i class="fa fa-play-circle-o" aria-hidden="true" ng-click="changeRoute('#/generate/'+report.id)"></i></h1>
     </div>
   </div>
 
+  <!-- Variables -->
+  <div class="card">
+    <div class="card-block">
+      <div class="row variable" ng-show="variableDisplayLegend()">
+        <div class="col-xs-3">Name</div>
+        <div class="col-xs-3">Label</div>
+        <div class="col-xs-3">Default</div>
+      </div>
+      <div ng-repeat="variable in report.variables track by $index">
+        <div class="row variable">
+          <div class="col-xs-3"><input type="text" class="form-control" ng-model="variable.name" ng-change="variableNameChanged($index)"></div>
+          <div class="col-xs-3"><input type="text" class="form-control" ng-model="variable.label"></div>
+          <div class="col-xs-3"><input type="text" class="form-control" ng-model="variable.value"></div>
+          <div class="col-xs-3"><i ng-click="variableDelete($index)" class="fa fa-times" aria-hidden="true"></i></div>
+        </div>
+      </div>
+      <button class="btn" ng-click="variableAdd()">Add Variable</button><i ng-show="variableDisplayLegend()">(use !NAME! in the SQL)</i>
+    </div>
+  </div>
+
+  <!-- Subreports -->
   <div class="card" ng-repeat="subreport in report.subreports track by $index">
 
     <div class="card-block">

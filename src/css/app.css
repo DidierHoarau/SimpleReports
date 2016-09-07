@@ -97,3 +97,15 @@ textarea {
 .report-text {
     width:100%;
 }
+
+.variable {
+    margin-bottom: 0.4em;
+}
+
+.variable i {
+    margin-top: 0.5em;
+}
+
+.variable label {
+    margin-top: 0.3em;
+}

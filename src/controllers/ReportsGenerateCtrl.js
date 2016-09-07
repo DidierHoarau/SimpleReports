@@ -32,6 +32,7 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
                 }
                 // Delayed calculation
                 $timeout(function() {
+                    $scope.report_cur_pos = 0;
                     $scope.executeReport();
                 }, 0);
             },
@@ -60,8 +61,10 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
             return;
         }
 
+        // Report data
+        var data = { variables: $scope.report.variables };
         // Others: Queries
-        httpT.get("/api/reports/execute/"+$scope.report.id+"/"+$scope.report_cur_pos).then(
+        httpT.post("/api/reports/execute/"+$scope.report.id+"/"+$scope.report_cur_pos,data).then(
             function successCallback(response) {
 
                 var subreport = $scope.report.subreports[$scope.report_cur_pos];
@@ -204,6 +207,18 @@ angular.module('reportsgeneratectrl', [ 'toaster' ])
         );
     };
 
+    // Should varaibles be displayed?
+    $scope.variableIsDisplayed = function() {
+        if ($scope.report.variables==null || $scope.report.variables.length==0) {
+            return false;
+        }
+        return true;
+    }
 
+    // Run the report
+    $scope.reportRun = function() {
+        $scope.report_cur_pos = 0;
+        $scope.executeReport();
+    }
 
 }]);
