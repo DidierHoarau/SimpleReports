@@ -1,4 +1,3 @@
-api/vendor/
-bower_components/
-api/composer.lock
-data/
+SimpleReports_src/api/vendor/
+SimpleReports_src/bower_components/
+SimpleReports_src/api/composer.lock
