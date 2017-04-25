@@ -11,8 +11,8 @@ EXPOSE 80/tcp
 RUN apt-get update && apt-get -y install apache2 php-mysql php libapache2-mod-php \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY files/000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY files/startup.sh /var/opt/startup.sh
+COPY files-app/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY files-app/startup.sh /var/opt/startup.sh
 
 RUN /usr/sbin/a2dismod 'mpm_*' && /usr/sbin/a2enmod mpm_prefork \
     && /usr/sbin/a2ensite default-ssl \
@@ -21,6 +21,8 @@ RUN /usr/sbin/a2dismod 'mpm_*' && /usr/sbin/a2enmod mpm_prefork \
     && a2enmod socache_shmcb \
     && echo ServerName localhost  >> /etc/apache2/apache2.conf \
     && chmod +x /var/opt/startup.sh
+
+COPY dist/src /var/www/html
 
 # Runtime command
 CMD ["/var/opt/startup.sh"]

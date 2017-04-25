@@ -1,0 +1,6 @@
+FROM mysql
+
+COPY files-db/sqlloader.sh /opt/data/
+COPY files-db/dump.sql /opt/data/
+
+RUN chmod +x /opt/data/sqlloader.sh

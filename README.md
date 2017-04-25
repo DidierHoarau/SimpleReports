@@ -4,23 +4,26 @@ This is a simple PHP reporting tool for MySQL databases.
 
 # Installation
 
-- Clone Repository
+## Requirement
 
-- In the root directory:
-```
-npm install -g bower-npm-resolver
-bower update
-```
+To build and run this project, you will need the following:
+- Docker
+- Docker Compose
+- NodeJS
+- PHP Composer
 
-- In the api directory:
+## Procedure
+
 ```
-composer install
+git clone https://github.com/DidierHoarau/simple-reports
+cd simple-reports
+npm run packaging:prepare
+npm run packaging:image-build
+npm run packaging:service-run
 ```
 
 # Configuration
-
-- Edit the file `src/js/config.js` and change the relative path
-
-- Edit the file `api/.htaccess` and and change the relative path to the api subfolder
-
-- Edit the file `api/config/config.php` and and change the database access information relative path to the api subfolder
+- Database:
+ - Edit the file `src/api/config/config.php`
+ - Edit the file `docker-packaging-config/docker-compose.yml`
+- Docker Container: edit the file `docker-packaging-config/docker-compose.yml`

@@ -1,0 +1,21 @@
+{
+  "name": "simple-report",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "homepage": "",
+  "license": "UNLICENSED",
+  "scripts": {
+    "packaging:prepare": "docker-packaging/prepare.sh",
+    "packaging:image-build": "docker-packaging/image-build.sh",
+    "packaging:service-deploy": "docker-packaging/service-deploy.sh",
+    "packaging:service-run": "docker-packaging/service-run.sh"
+  },
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "bower-npm-resolver": "^0.7.0"
+  },
+  "dependencies": {
+  }
+}

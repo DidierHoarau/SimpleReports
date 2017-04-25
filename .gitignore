@@ -1,3 +1,5 @@
-SimpleReports_src/api/vendor/
-SimpleReports_src/bower_components/
-SimpleReports_src/api/composer.lock
+/src/api/vendor/
+/src/bower_components/
+/src/api/composer.lock
+/docker-packaging-config/dist
+/node_modules
